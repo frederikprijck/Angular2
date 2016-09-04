@@ -12,16 +12,28 @@
     '@angular':                   'node_modules/@angular',
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs',
-    'moment':                     'node_modules/moment/moment.js'
+    'moment':                     'node_modules/moment/moment.js',
+    'ts':                         'node_modules/plugin-typescript/lib/',
+    'typescript':                 'node_modules/typescript/',
+    'plugin-typescript':          'node_modules/plugin-typescript/lib/',
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
-    'app':                        { main: 'main.js',  defaultExtension: 'js' },
-    'person':                     { main: 'index.js', },
-    'orderby':                    { main: 'index.js', },
-    'shared':                     { main: 'index.js', },
+    'app':                        { main: 'main.ts',  defaultExtension: 'ts', },
+    'person':                     { main: 'index.ts', defaultExtension: 'ts' },
+    'orderby':                    { main: 'index.ts', defaultExtension: 'ts' },
+    'shared':                     { main: 'index.ts', defaultExtension: 'ts' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+    'ts': { 'main': 'plugin.js' },
+    'typescript': { 
+      'main': 'lib/typescript.js',
+      'meta': {
+        'lib/typescript.js': {
+          'exports': 'ts'
+        }
+      }
+    }
   };
   var ngPackageNames = [
     'common',
