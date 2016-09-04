@@ -28,8 +28,10 @@ export class PersonService {
     }
 
     search(value: string): Promise<Person[]> {
-        return this.getPersons()
-            .then(persons =>  persons.filter(person =>  person.getFullName().search(new RegExp(value, "i")) > -1));
+        return this._http.get(`${this.personsApi}?firstName=${value}+`)
+            .toPromise()
+            .then(response => response.json().data.map(x => this.mapJson(x)))
+            .catch(this.handleError);
     }
 
     getPerson(id: string) {
@@ -58,6 +60,12 @@ export class PersonService {
     }
 
     /* Private Commands */
+    private getAll(url) {
+        return this._http.get(url)
+            .toPromise()
+            .then(response => response.json().data.map(x => this.mapJson(x)))
+            .catch(this.handleError);
+    }
 
     // Add new person
     private post(person: Person): Promise<Person> {
