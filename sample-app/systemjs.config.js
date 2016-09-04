@@ -14,12 +14,11 @@
     'rxjs':                       'node_modules/rxjs',
     'moment':                     'node_modules/moment/moment.js',
     'ts':                         'node_modules/plugin-typescript/lib/',
-    'typescript':                 'node_modules/typescript/',
-    'plugin-typescript':          'node_modules/plugin-typescript/lib/',
+    'typescript':                 'node_modules/typescript/'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
-    'app':                        { main: 'main.ts',  defaultExtension: 'ts', },
+    'app':                        { main: 'main.ts',  defaultExtension: 'ts'},
     'person':                     { main: 'index.ts', defaultExtension: 'ts' },
     'orderby':                    { main: 'index.ts', defaultExtension: 'ts' },
     'shared':                     { main: 'index.ts', defaultExtension: 'ts' },
@@ -64,7 +63,8 @@
     // DEMO ONLY! REAL CODE SHOULD NOT TRANSPILE IN THE BROWSER
     transpiler: 'ts',
     typescriptOptions: {
-      tsconfig: true
+      tsconfig: true,
+      typeCheck: true
     },
     meta: {
       'typescript': {

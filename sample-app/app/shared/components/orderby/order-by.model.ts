@@ -1,9 +1,4 @@
-export interface OrderBy {
-    target: string;
-    direction: boolean;
-}
-
-export class OrderyBy2 {
+export class OrderBy {
     target: string;
     direction: boolean;
 }
