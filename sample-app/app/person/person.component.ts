@@ -40,7 +40,9 @@ export class PersonComponent {
     }
 
     onSearch(value) {
-        console.log(`Searching: ${value}`);
+        this._personService.search(value)
+            .then(persons => this.persons = persons)
+            .catch(error => this.error = error);
     }
 
     getPersons() {

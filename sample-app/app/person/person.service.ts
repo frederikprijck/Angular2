@@ -23,8 +23,13 @@ export class PersonService {
     getPersons(): Promise<Person[]> {
         return this._http.get(this.personsApi)
             .toPromise()
-            .then(response => response.json().data as Person[])
+            .then(response => response.json().data.map(x => this.mapJson(x)))
             .catch(this.handleError);
+    }
+
+    search(value: string): Promise<Person[]> {
+        return this.getPersons()
+            .then(persons =>  persons.filter(person =>  `${person.getFullName()}`.indexOf(value) > -1));
     }
 
     getPerson(id: string) {
@@ -79,6 +84,13 @@ export class PersonService {
             .toPromise()
             .then(() => person)
             .catch(this.handleError);
+    }
+
+    // Map the JSON request so we can use the getFullName() method
+    private mapJson(data: any) : Person {
+        var person = new Person(data.firstName, data.lastName, data.email, data.phoneNumber, data.country);
+        person.id = data.id;
+        return person;
     }
 
     private handleError(error: any) {
