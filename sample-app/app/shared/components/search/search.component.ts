@@ -29,4 +29,8 @@ export class SearchComponent {
             this.search.emit({ value: value});
         }
     }
+
+    toggleMode() {
+        this.mode === 'live' ? this.mode = 'click' : this.mode = 'live';
+    }
 }
