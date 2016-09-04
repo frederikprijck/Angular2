@@ -29,7 +29,7 @@ export class PersonService {
 
     search(value: string): Promise<Person[]> {
         return this.getPersons()
-            .then(persons =>  persons.filter(person =>  `${person.getFullName()}`.indexOf(value) > -1));
+            .then(persons =>  persons.filter(person =>  person.getFullName().search(new RegExp(value, "i")) > -1));
     }
 
     getPerson(id: string) {
