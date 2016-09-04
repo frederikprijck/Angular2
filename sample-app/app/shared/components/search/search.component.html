@@ -1,0 +1,15 @@
+<div class="search input-group">
+    <input
+        type="text"
+        class="form-control"
+        placeholder="Search for..."
+        [(ngModel)]="value"
+        (ngModelChange)="onChange(searchValue)">
+    <span class="input-group-btn">
+        <button
+            class="btn btn-default"
+            type="button"
+            (click)="onClick(searchValue)"
+            [disabled]="mode !== 'click'">Search!</button>
+    </span>
+</div>

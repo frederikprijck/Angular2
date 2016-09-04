@@ -39,6 +39,10 @@ export class PersonComponent {
         this._router.navigate(['/person/create']);
     }
 
+    onSearch(value) {
+        console.log(`Searching: ${value}`);
+    }
+
     getPersons() {
         this._personService.getPersons()
             .then(persons => this.persons = persons)

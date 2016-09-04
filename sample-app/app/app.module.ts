@@ -11,7 +11,7 @@ import { Team4TalentComponent }                         from './team4talent/team
 import { AppComponent }                                 from './app.component';
 import { Routing }                                      from './app.routing';
 import * as person                                      from './person';
-import { OrderByComponent }                             from './shared';
+import { OrderByComponent, SearchComponent }                             from './shared';
 
 @NgModule({
   imports: [
@@ -30,7 +30,8 @@ import { OrderByComponent }                             from './shared';
     Team4TalentComponent,
     person.PersonComponent,
     person.PersonDetailComponent,
-    OrderByComponent
+    OrderByComponent,
+    SearchComponent
   ],
   bootstrap: [AppComponent]
 })
