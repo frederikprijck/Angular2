@@ -6,6 +6,7 @@ import { OrderByPipeline, OrderByComponent, OrderByHeadComponent, OrderBy } from
 import { Subject} from 'rxjs/Subject';
 import { Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/startWith';
 
 @Component({
     selector: 'persons',
@@ -29,11 +30,11 @@ export class PersonComponent {
         this.orderByFilter = '+';
 
         this.search$
+            .startWith('')
             .debounceTime(1000)
             .map(value => value.trim())
             .distinctUntilChanged()
             .switchMap(value => this._personService.search(value))
-            .merge(this._personService.search(""))
             .subscribe(persons => this.persons = persons, error => console.log(error), () => console.log("completed"));
     } 
 
