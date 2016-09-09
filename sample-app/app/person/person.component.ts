@@ -7,6 +7,7 @@ import { Subject} from 'rxjs/Subject';
 import { Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/filter';
 
 @Component({
     selector: 'persons',
@@ -17,11 +18,10 @@ import 'rxjs/add/operator/startWith';
 })
 export class PersonComponent {
     error: any;
-    persons: Person[];
+    persons: Observable<Array<Person>>;
     selectedPerson: Person;
     orderByTarget: OrderBy;
     orderByFilter = '+';
-
     search$ = new Subject<string>();
 
     constructor(private _router: Router, private _personService: PersonService) { }
@@ -29,13 +29,13 @@ export class PersonComponent {
     ngOnInit() {
         this.orderByFilter = '+';
 
-        this.search$
+        this.persons = this.search$
             .startWith('')
             .debounceTime(1000)
             .map(value => value.trim())
             .distinctUntilChanged()
-            .switchMap(value => this._personService.search(value))
-            .subscribe(persons => this.persons = persons, error => console.log(error), () => console.log("completed"));
+            .switchMap(value => this._personService.search(value));
+
     } 
 
     UpdateSort(orderBy: OrderBy) {
@@ -57,7 +57,7 @@ export class PersonComponent {
         this._personService
             .delete(person)
             .then(res => {
-                this.persons = this.persons.filter(h => h !== person);
+                this.persons = this.persons.map(h => h.filter(x => x !== person));
                 if (this.selectedPerson === person) { this.selectedPerson = null; }
             })
             .catch(error => this.error = error);
